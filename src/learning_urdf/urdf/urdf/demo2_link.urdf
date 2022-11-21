@@ -1,0 +1,27 @@
+<!-- 设置不同形状的机器人部件 -->
+<robot name="mycar">
+    <link name="base_link">
+        <!-- 可视化标签 -->
+        <visual>
+            <!-- 形状 -->
+            <geometry>
+                <!-- <box size="2 0.3 0.1"/>
+                <cylinder radius="0.1" length="0.1" />
+                <sphere radius="0.5"/> -->
+                <mesh filename="package://learning_urdf/meshes/autolabor_mini.stl"/>
+            </geometry>
+            <!-- 偏移量与倾斜幅度 -->
+            <!-- xyz 设置机器人在xyz方向的偏移量
+                 rpy 用于设置倾斜弧度 即欧拉角 -->
+            <origin xyz="0 0 0" rpy="1.57 0 0" />
+            <!-- 颜色
+                rgba:
+                    rgb使用小数形式
+                    a是透明度，也是小数 -->
+            <material name="car_color" >
+                <color rgba='0.5 0.2 0.1 0.9'/>
+            </material>
+
+        </visual>
+    </link>    
+</robot>

@@ -1,0 +1,120 @@
+<robot name='mycar'>
+    <!-- 通过添加一个footprint来避免机器人沉入地面 -->
+    <link name="base_footprint">      
+        <visual>
+            <geometry>
+                <sphere radius="0.001"/>
+            </geometry>
+        </visual>
+    </link> 
+    <!-- link的偏移量最好是通过joint来实现,否则每个link的坐标系就发生偏移,后期会造成麻烦 -->
+    <!-- 关联joint -->
+    <joint name="link2footprint" type="fixed"> 
+        <parent link='base_link'/>
+        <child link='base_footprint'/>
+        <origin xyz='0 0 -0.055' rpy='0 0 0' />
+    </joint>
+
+    <link name="base_link">      
+        <visual>
+            <geometry>
+                <cylinder radius="0.1" length="0.08"/>
+            </geometry>
+            
+            <origin xyz="0 0 0" rpy="0 0 0" />
+
+            <material name="base_color" >
+                <color rgba='0.5 0.2 0.1 0.5'/>
+            </material>
+        </visual>
+    </link>    
+    <!-- 驱动轮 -->
+    <link name="left_wheel">      
+        <visual>
+            <geometry>
+                <cylinder radius="0.0325" length="0.015"/>
+            </geometry>
+            
+            <origin xyz="0 0 0" rpy="1.5708 0 0" />
+            
+            <material name="wheel_color" >
+                <color rgba='0 0 0 0.3'/>
+            </material>
+        </visual>
+    </link>   
+
+    <link name="right_wheel">      
+        <visual>
+            <geometry>
+                <cylinder radius="0.0325" length="0.015"/>
+            </geometry>
+            
+            <origin xyz="0 0 0" rpy="1.5708 0 0" />
+            
+            <material name="wheel_color" >
+                <color rgba='0 0 0 0.3'/>
+            </material>
+        </visual>
+    </link>
+    
+    <joint name="left2link" type='continuous' >
+        <parent link='base_link'/>
+        <child link='left_wheel'/>
+        <origin xyz='0 0.1 -0.0225' rpy='0 0 0' />
+        <!-- 关节旋转参考轴 -->
+        <axis xyz='0 1 0'/>
+    </joint>
+
+    <joint name="right2link" type='continuous' >
+        <parent link='base_link'/>
+        <child link='right_wheel'/>
+        <origin xyz='0 -0.1 -0.0225' rpy='0 0 0' />
+        <!-- 关节旋转参考轴 -->
+        <axis xyz='0 1 0'/>
+    </joint>
+
+    <!-- 万向轮 -->
+    <link name="front_wheel">      
+        <visual>
+            <geometry>
+                <sphere radius="0.0075"/>
+            </geometry>
+            
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            
+            <material name="wheel_color" >
+                <color rgba='0 0 0 0.3'/>
+            </material>
+        </visual>
+    </link>
+
+    <link name="back_wheel">      
+        <visual>
+            <geometry>
+                <sphere radius="0.0075"/>
+            </geometry>
+            
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            
+            <material name="wheel_color" >
+                <color rgba='0 0 0 0.3'/>
+            </material>
+        </visual>
+    </link>
+
+    <joint name="front2link" type='continuous' >
+        <parent link='base_link'/>
+        <child link='front_wheel'/>
+        <origin xyz='0.08 0 -0.0475' rpy='0 0 0' />
+        <!-- 关节旋转参考轴 万向轮不设置旋转轴还报错,服了-->
+        <axis xyz='0 1 0'/>
+    </joint>
+
+    <joint name="back2link" type='continuous' >
+        <parent link='base_link'/>
+        <child link='back_wheel'/>
+        <origin xyz='-0.08 0 -0.0475' rpy='0 0 0' />
+        <!-- 关节旋转参考轴 -->
+        <axis xyz='0 1 0'/>
+    </joint>
+ </robot>

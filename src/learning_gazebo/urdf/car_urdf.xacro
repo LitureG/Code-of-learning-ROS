@@ -1,0 +1,17 @@
+<!-- 集成小车各个部位 -->
+<robot name="mycar" xmlns:xacro="http://wiki.ros.org/xacro">
+    <!-- 包含惯性矩阵 -->
+    <xacro:include filename="inertial_matrix.xacro" />
+    <xacro:include filename="demo5_car_base.xacro" />
+    <xacro:include filename="demo6_laser.xacro" />
+    <xacro:include filename="demo7_car_camera.xacro" />
+    <!-- 运动控制 -->
+    <xacro:include filename="gazebo/move.xacro" />
+    <!-- 雷达 -->
+    <xacro:include filename="gazebo/laser.xacro" />
+    <!-- 摄像头 -->
+    <xacro:include filename="gazebo/camera.xacro" />
+    <!-- kinect -->
+    <xacro:include filename="gazebo/kinect.xacro" />
+
+</robot>

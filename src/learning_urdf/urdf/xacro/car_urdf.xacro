@@ -1,0 +1,8 @@
+<!-- 集成小车各个部位 -->
+<robot name="mycar" xmlns:xacro="http://wiki.ros.org/xacro">
+    
+    <xacro:include filename="demo5_car_base.xacro" />
+    <xacro:include filename="demo6_laser.xacro" />
+    <xacro:include filename="demo7_car_camera.xacro" />
+
+</robot>

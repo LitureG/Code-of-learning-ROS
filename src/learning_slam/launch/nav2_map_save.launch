@@ -1,0 +1,4 @@
+<launch>
+    <arg name="filename" value="$(find learning_slam)/map/nav" />
+    <node name="map_save" pkg="map_server" type="map_server" args="-f $(arg filename)" />
+</launch>

@@ -1,0 +1,11 @@
+<robot name="mycar" xmlns:xacro="http://wiki.ros.org/xacro">
+    <!-- 属性定义 有点像全局变量-->
+    <xacro:property name="PI" value="3.1415927" />
+    <xacro:property name="radius" value="0.03" />
+    <!-- 属性调用 前面的标签是自定义的,实际上就是使用${}来置换前面定义的值-->
+    <myProperty name="${PI}" />
+    <myProperty name="${radius}" />
+    <!-- 算术运算 return 计算结果-->
+    <myProperty result="${PI / 2}" />
+    <myProperty result="${radius * 2}" />
+</robot>

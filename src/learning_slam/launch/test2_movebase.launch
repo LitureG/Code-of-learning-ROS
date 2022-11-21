@@ -1,0 +1,15 @@
+<!--集成导航相关文件-->
+<launch>
+    <!-- 运行地图服务器，并且加载设置的地图-->
+    <include file="$(find learning_slam)/launch/nav3_map_server.launch" />
+    <!-- 启动AMCL节点 -->
+    <include file="$(find learning_slam)/launch/nav4_amcl.launch" />
+
+    <!-- 运行move_base节点 -->
+    <include file="$(find learning_slam)/launch/test2_movebase.launch" />
+    <!-- 运行rviz -->
+    <node pkg="joint_state_publisher" name="joint_state_publisher" type="joint_state_publisher" />
+    <node pkg="robot_state_publisher" name="robot_state_publisher" type="robot_state_publisher" />
+
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find learning_slam)/config/gmapping.rviz"/>
+</launch>

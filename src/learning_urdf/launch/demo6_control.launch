@@ -1,0 +1,19 @@
+<launch>
+    <!-- 1.在参数服务器载入 urdf 文件  将后面查找的xacro文件通过前面的找的内置功能包xacro解析成urdf再导入参数服务器 -->
+    <param name="robot_description" command="$(find xacro)/xacro '$(find learning_urdf)/urdf/xacro/car_urdf.xacro'"/>
+    <!-- 2.启动rviz 将设置保存并导入 -->
+    <node pkg="rviz" type="rviz" name="rviz" args='-d $(find learning_urdf)/config/show_mycar.rviz'/>
+    
+     <!-- 关节状态发布节点 -->
+    <node pkg="robot_state_publisher" type='robot_state_publisher' name='robot_state_publisher'/>
+     <!-- 机器人状态发布节点 -->
+    <node pkg="joint_state_publisher" type='joint_state_publisher' name='joint_state_publisher'/>
+
+    <!-- 集成arbotix运动控制节点,并且加载参数 -->
+    <node pkg="arbotix_python" type="arbotix_driver" name='driver' output='screen' >
+        <rosparam command='load' file='$(find learning_urdf)/config/control.yaml' />
+        <param name='sim' value='true' />
+    </node>
+    
+</launch>
+

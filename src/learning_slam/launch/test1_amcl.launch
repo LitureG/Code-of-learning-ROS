@@ -1,0 +1,13 @@
+<!-- 测试文件 -->
+<launch>
+    <!-- 启动rviz -->
+    <node pkg="rviz" type="rviz" name="rviz" />
+     <!-- 机器人状态发布节点 -->
+    <node pkg="robot_state_publisher" type='robot_state_publisher' name='robot_state_publisher'/>
+     <!-- 关节状态发布节点 -->
+    <node pkg="joint_state_publisher" type='joint_state_publisher' name='joint_state_publisher'/>
+    <!-- load map_server -->
+    <include file="$(find learning_slam)/launch/nav3_map_server.launch" />
+    <!-- amcl film -->
+    <include file="$(find learning_slam)/launch/nav4_amcl.launch" />
+</launch>

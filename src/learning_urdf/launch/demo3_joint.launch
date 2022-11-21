@@ -1,0 +1,25 @@
+<launch>
+    <!-- 1.在参数服务器载入 urdf 文件 -->
+    <param name="robot_description" textfile="$(find learning_urdf)/urdf/urdf/demo3_joint.urdf"/>
+    <!-- 2.启动rviz 将设置保存并导入 -->
+    <node pkg="rviz" type="rviz" name="rviz" args='-d $(find learning_urdf)/config/show_mycar.rviz'/>
+    <!-- 
+        只有上述语句:
+        表现:Failed to parse(解析) URDF model
+        原因:rviz中显示urdf时,必须发布不同部件之间的坐标系关系(TF)
+        解决:ros中提供了关于机器人模型显示的坐标发布相关节点(两个)
+        joint_state_publisher joint_state_publisher 
+        robot_state_publisher robot_state_publisher
+
+
+        第一次报错找了半天才发现是urdf有一个标签的最后少了"/",我真是服了
+     -->
+     <!-- 关节状态发布节点 -->
+    <node pkg="robot_state_publisher" type='robot_state_publisher' name='robot_state_publisher'/>
+     <!-- 机器人状态发布节点 -->
+    <node pkg="joint_state_publisher" type='joint_state_publisher' name='joint_state_publisher'/>
+    <!-- 打开一个图形化控制界面,让摄像头转起来 -->
+    <node pkg="joint_state_publisher_gui" type='joint_state_publisher_gui' name='joint_state_publisher_gui'/>
+    
+</launch>
+
